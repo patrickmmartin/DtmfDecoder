@@ -9,5 +9,14 @@ uses
   NSPErrorHandler in 'NSPErrorHandler.pas';
 
 begin
-  { TODO -oUser -cConsole Main : Insert code here }
+
+  { TODO : parse parameters }
+
+  { TODO : create audio stream from live input or file }
+
+  { TODO : start streaming audio chunks into the detector }
+
+  { TODO : wait for completion / cancellation }
+
+
 end.
