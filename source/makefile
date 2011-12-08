@@ -51,7 +51,7 @@ targets: DtmfDecode.exe
 all: targets
 
 clean:
-	if exist ..\dcu del /F /Q /S ..\dcu\*.* > nul
+	if exist ..\dcu del /F /Q /S ..\dcu\*.dcu > nul
 	if exist ..\bin del /F /Q /S ..\bin\*.* > nul
 
 
