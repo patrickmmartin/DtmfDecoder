@@ -6,7 +6,13 @@ uses
   SysUtils,
   DTMF in 'DTMF.pas',
   DTMFConsts in 'DTMFConsts.pas',
-  NSPErrorHandler in 'NSPErrorHandler.pas';
+  NSPErrorHandler in 'NSPErrorHandler.pas',
+  AudioBase in 'AudioBase.pas',
+  AudioIn in 'AudioIn.pas',
+  AudioOut in 'AudioOut.pas',
+  AppMessages in 'AppMessages.pas',
+  AppUtils in 'AppUtils.pas',
+  AppConsts in 'AppConsts.pas';
 
 begin
 
