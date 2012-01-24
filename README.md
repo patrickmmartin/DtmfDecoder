@@ -11,8 +11,8 @@ This was part of a suite of components written in Delphi to implement a real tim
 The style is pretty much "of its era" Delphi, if a little pointer oriented.
 
 A couple of interesting points are:
-+ use of the Intel NSP library
 
++ use of the Intel NSP library
 + choice of the Goertzel function to detect tones, over (say) FFT 
 
 ## Technology
