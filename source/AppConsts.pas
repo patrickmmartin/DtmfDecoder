@@ -324,6 +324,7 @@ begin
     if (TraceFile = 0) then
 
 
+     { TODO : remove reliance upon Application }
      TraceFile := CreateFile(PChar(Format('%s[%.8x].log',
                                 [ChangeFileExt(Application.ExeName, ''),
                                  GetCurrentProcessID])),

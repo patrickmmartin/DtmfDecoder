@@ -48,26 +48,31 @@ resourcestring
 
 function DoMessage(msg, MsgType : string; IconType, flags : integer) : integer;
 begin
+  { TODO : remove reliance upon Application }
   Result := Application.MessageBox(PChar(msg),  PChar(Application.Title + ' ' + MsgType), IconType or flags);
 end;
 
 function ErrorMessage(msg : string; flags : integer) : integer;
 begin
+  { TODO : remove reliance upon Application }
   Result := DoMessage(msg, sError, MB_ICONERROR, flags);
 end;
 
 function WarningMessage(msg : string; flags : integer) : integer;
 begin
+  { TODO : remove reliance upon Application }
   Result := DoMessage(msg, sWarning, MB_ICONWARNING, flags);
 end;
 
 function ConfirmationMessage(msg : string; flags : integer) : integer;
 begin
+  { TODO : remove reliance upon Application }
   Result := DoMessage(msg, sConfirmation, MB_ICONQUESTION, flags);
 end;
 
 function InformationMessage(msg : string; flags : integer) : integer;
 begin
+  { TODO : remove reliance upon Application }
   Result := DoMessage(msg, sInformation, MB_ICONINFORMATION, flags);
 end;
 
@@ -108,6 +113,7 @@ end;
 procedure TMessageBoxThread.Execute;
 begin
 
+  { TODO : remove reliance upon Application ? - was this ever a good idea?}
   Application.MessageBox(PChar(fMsg),  PChar(Application.Title + ' ' + fMsgType), fFlags);
 
 end;
