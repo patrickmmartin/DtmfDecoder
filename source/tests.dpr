@@ -10,7 +10,6 @@ uses
   GUITestRunner,
   TextTestRunner,
   TextTestRunnerEx in 'dunit\TextTestRunnerEx.pas',
-  DTMFDecoderTests in 'dunit\DTMFDecoderTests.pas',
   DTMFConsts in 'DTMFConsts.pas',
   DTMF in 'DTMF.pas',
   AppConsts in 'AppConsts.pas',
@@ -19,7 +18,10 @@ uses
   AudioBase in 'AudioBase.pas',
   AudioIn in 'AudioIn.pas',
   AudioOut in 'AudioOut.pas',
-  AudioOutTests in 'dunit\AudioOutTests.pas';
+  AudioInTests in 'dunit\AudioInTests.pas',
+  AudioOutTests in 'dunit\AudioOutTests.pas',
+  AppUtilsTests in 'dunit\AppUtilsTests.pas',
+  AudioBaseTests in 'dunit\AudioBaseTests.pas';
 
 {$R *.RES}
 

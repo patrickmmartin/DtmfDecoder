@@ -141,9 +141,11 @@ Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 Count=1
 Item0=..\nsp\include
 [HistoryLists\hlUnitOutputDirectory]
-Count=2
+Count=4
 Item0=..\dcu\DTMFDecode
-Item1=..\dcu
+Item1=..\dcu\tests
+Item2=..\dcu\DTMFDecoder
+Item3=..\dcu
 [HistoryLists\hlOutputDirectorry]
 Count=1
 Item0=..\bin

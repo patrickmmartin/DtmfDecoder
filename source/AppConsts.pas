@@ -15,11 +15,11 @@ uses
 
 {internal exception types}
 type
-  ERSIError = class(Exception);
-    ENotImplementedError = class(ERSIError);
-    ENotCapableError = class(ERSIError);
-    EOutOfRangeError = class(ERSIError);
-    EConfigurationError = class(ERSIError);
+  EAppError = class(Exception);
+    ENotImplementedError = class(EAppError);
+    ENotCapableError = class(EAppError);
+    EOutOfRangeError = class(EAppError);
+    EConfigurationError = class(EAppError);
 
 
 { A generic logging event}

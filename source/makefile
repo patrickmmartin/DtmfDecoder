@@ -4,8 +4,8 @@
 ROOT = $(MAKEDIR)\..
 !endif
 
-MAKE = "$(ROOT)\bin\make.exe" -$(MAKEFLAGS) -f$**
-BRCC = "$(ROOT)\bin\brcc32.exe" $**
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+BRCC = $(ROOT)\bin\brcc32.exe $**
 
 # the Delphi 7 make doesn't like the path to be too long
 # this is a very simple fix
@@ -32,23 +32,25 @@ DCC  = "$(ROOT)\bin\dcc32.exe" \
 	echo ========== build for $@ ======
 	if not exist ..\bin mkdir ..\bin
 	if not exist ..\dcu\$& mkdir ..\dcu\$&
-#	buildkeys $@
-#	$(BRCC) $&.rcscript
-        $(DCC) $&.dpr
-
+        $(DCC)
 
 default: clean all
 
-DtmfDecode.exe:
+DTMFDecode.exe: DTMFDecode.dpr
 
-tests.exe:
+tests.exe: tests.dpr
 
-targets: tests.exe DtmfDecode.exe
+TARGETS=tests.exe DtmfDecode.exe
 
-all: targets
+all: $(TARGETS)
 
+# TODO: could do with a specialised target
 clean:
+        echo ==== cleaning $@ $&& ====
 	if exist ..\dcu del /F /Q /S ..\dcu\*.dcu > nul 2> nul
-	if exist ..\bin ( cd ..\bin & del %$(TARGETS) ) 
+	if exist ..\bin cd ..\bin & del /F $(TARGETS)
+
+tests: clean tests.exe ..\bin\nsp.dll
+        ..\bin\tests.exe /CONSOLE        
 
 
