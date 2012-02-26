@@ -1,13 +1,6 @@
 unit AudioOut;
 
-
 interface
-
-{$IFDEF VER140}
-{ lose the deprecated warning }
-  {$WARN SYMBOL_DEPRECATED OFF}
-{$ENDIF}
-
 
 uses
   Windows,       { windows types}
@@ -132,7 +125,6 @@ TWaveOutThread = class (TThread)
 implementation
 
 uses
-  Forms,        { AllocateHwnd }
   typinfo,      { BooleanIdents }
   Appmessages   { *MessageAsynch }
   ;
@@ -654,7 +646,8 @@ begin
       end;
     end;
   except
-    Application.HandleException(Self);
+    { TODO : delegate to suitable exception handler }
+    // Application.HandleException(Self);
   end;
 end;
 
@@ -810,7 +803,8 @@ begin
         until ((fAudioOut.fStopping) and (not fAudioOut.fActive));
 
         except
-          Application.HandleException(self);
+          { TODO : delegate to suitable exception handler }
+          // Application.HandleException(self);
         end;
 
         Trace(Format('AudioOut %d not stopping : Thread suspend', [fAudioOut.WaveDevice]), lsNormal);

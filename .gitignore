@@ -5,3 +5,6 @@
 /bin/DTMFDecode.exe
 /bin/DtmfDecode.exe
 /bin
+/source/DTMFDecoder.~bpg
+/source/makefile.~
+/source/tests.~dpr

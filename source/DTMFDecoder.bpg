@@ -9,13 +9,16 @@ MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
 DCC = $(ROOT)\bin\dcc32.exe $**
 BRCC = $(ROOT)\bin\brcc32.exe $**
 #------------------------------------------------------------------------------
-PROJECTS = DTMFDecode.exe
+PROJECTS = DTMFDecode.exe tests.exe
 #------------------------------------------------------------------------------
 default: $(PROJECTS)
 #------------------------------------------------------------------------------
 
 
 DTMFDecode.exe: DTMFDecode.dpr
+  $(DCC)
+
+tests.exe: tests.dpr
   $(DCC)
 
 

@@ -15,7 +15,7 @@ PATH=$(ROOT)\bin
 DCCOPT=-Q -M -W -H
 
 # for Controls.res, WindowsXP.res or anything else in lib...
-SEARCHPATH = "$(ROOT)\Lib;$(SEARCHPATH)"
+SEARCHPATH = "$(ROOT)\Lib;$(SEARCHPATH);$(ROOT)\dunit\src"
 
 #compiler command line
 DCC  = "$(ROOT)\bin\dcc32.exe" \
@@ -27,31 +27,28 @@ DCC  = "$(ROOT)\bin\dcc32.exe" \
           -LN"$(DCPDIR)" \
           $(DCCOPT) -Q -W -H -M $&.dpr
 
+## create generic rule for executables built from a dpr file
+.dpr.exe:
+	echo ========== build for $@ ======
+	if not exist ..\bin mkdir ..\bin
+	if not exist ..\dcu\$& mkdir ..\dcu\$&
+#	buildkeys $@
+#	$(BRCC) $&.rcscript
+        $(DCC) $&.dpr
+
 
 default: clean all
 
+DtmfDecode.exe:
 
-bin: 
-	if not exist ..\bin mkdir ..\bin
+tests.exe:
 
-dcu-base:
-	if not exist ..\dcu mkdir ..\dcu
-dcu-DtmfDecode: dcu-base
-	if not exist ..\dcu\DtmfDecode mkdir ..\dcu\DtmfDecode
-
-
-dcu: dcu-base dcu-DtmfDecode
-
-DtmfDecode.exe: bin dcu-DtmfDecode
-	$(DCC) DtmfDecode.dpr
-
-
-targets: DtmfDecode.exe
+targets: tests.exe DtmfDecode.exe
 
 all: targets
 
 clean:
-	if exist ..\dcu del /F /Q /S ..\dcu\*.dcu > nul
-	if exist ..\bin del /F /Q /S ..\bin\*.* > nul
+	if exist ..\dcu del /F /Q /S ..\dcu\*.dcu > nul 2> nul
+	if exist ..\bin ( cd ..\bin & del %$(TARGETS) ) 
 
 

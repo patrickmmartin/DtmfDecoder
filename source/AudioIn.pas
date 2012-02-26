@@ -2,12 +2,6 @@ unit AudioIn;
 
 interface
 
-{$IFDEF VER140}
-{ lose the deprecated warning }
-  {$WARN SYMBOL_DEPRECATED OFF}
-{$ENDIF}
-
-
 uses
   Windows,       { windows types}
   MMSystem,      { MM types}
@@ -132,7 +126,6 @@ type
 implementation
 
 uses
-  Forms,        { AllocateHwnd }
   typinfo       { BooleanIdents }
   ;
 
@@ -755,7 +748,8 @@ begin
       DoBufferFilled(Msg.WParam);
     end;
   except
-    Application.HandleException(Self);
+    { TODO : delegate to suitable exception handler }
+    // Application.HandleException(Self);
   end;
 end;
 
@@ -949,7 +943,8 @@ begin
       until ((fAudioIn.fStopping) and (not fAudioIn.fActive));
 
       except
-        Application.HandleException(self);
+        { TODO : delegate to suitable exception handler }
+        //Application.HandleException(self);
       end;
 
       Trace(Format('AudioIn %d thread suspend', [fAudioIn.WaveDevice] ), lsInformation);

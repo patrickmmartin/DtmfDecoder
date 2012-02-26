@@ -10,7 +10,6 @@ uses
   AudioBase in 'AudioBase.pas',
   AudioIn in 'AudioIn.pas',
   AudioOut in 'AudioOut.pas',
-  AppMessages in 'AppMessages.pas',
   AppUtils in 'AppUtils.pas',
   AppConsts in 'AppConsts.pas';
 
