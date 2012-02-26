@@ -23,6 +23,12 @@ implementation
 
 { TTextTestListenerEx }
 
+(* class to improve open the test output for automated usage
+ note - the use of Write / WriteLn is inherited from the super class - will raise
+ error 105 if there is no console at the point of writing *)
+
+
+
 procedure TTextTestListenerEx.StartSuite(suite: ITest);
 begin
   WriteLn;

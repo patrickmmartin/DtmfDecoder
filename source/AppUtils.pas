@@ -340,7 +340,7 @@ end;
 
 initialization
 
-  UnitID := GetUnitID('RSIClasses');
+  UnitID := GetUnitID('AppUtils');
   InitializeCriticalSection(GlobalCriticalSection);
   InitTryEnterCriticalSectionPtr;
 

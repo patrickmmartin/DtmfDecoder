@@ -9,86 +9,88 @@ uses
 type
   TAudioInTests = class(TTestCase)
   private
-
+    FAudioIn: TAudioIn;
+    procedure CreateAudioIn();
   protected
 
-//    procedure SetUp; override;
-//    procedure TearDown; override;
+    procedure SetUp; override;
+    procedure TearDown; override;
 
   published
 
     // Test methods
     procedure TestCreate;
     procedure TestDestroy;
+    procedure TestCanOpen;
     procedure TestStart;
     procedure TestStop;
-    procedure TestCanOpen;
-
-  end;
-
-type
-  TWaveInThreadTests = class(TTestCase)
-  private
-
-  protected
-
-//    procedure SetUp; override;
-//    procedure TearDown; override;
-
-  published
-
-    // Test methods
-    procedure TestCreate;
-    procedure TestExecute;
 
   end;
 
 implementation
 
+uses
+  Windows,    { Sleep}
+  SysUtils,   { FreeAndNil }
+  AppConsts   { Tracing }
+  ;
+
 { TAudioInTests }
 
-procedure TAudioInTests.TestCanOpen;
+procedure TAudioInTests.CreateAudioIn;
 begin
+  CheckFalse(Assigned(FAudioIn));
+  { TODO : add some stub events to handle data, for validation }
+  FAudioIn := TAudioIn.Create;
+end;
 
+procedure TAudioInTests.SetUp;
+begin
+  inherited;
+end;
+
+procedure TAudioInTests.TearDown;
+begin
+  inherited;
+  FreeAndNil(FAudioIn);
 end;
 
 procedure TAudioInTests.TestCreate;
 begin
-
+  FAudioIn := TAudioIn.Create;
 end;
 
 procedure TAudioInTests.TestDestroy;
 begin
+  CreateAudioIn;
+  FreeAndNil(FAudioIn);
+end;
 
+procedure TAudioInTests.TestCanOpen;
+begin
+  CreateAudioIn;
+  Check(FAudioIn.CanOpen, 'the default audio device cannot be opened');
 end;
 
 procedure TAudioInTests.TestStart;
 begin
-
+  CreateAudioIn;
+  FAudioIn.Start;
+  Sleep(1000);
 end;
 
 procedure TAudioInTests.TestStop;
 begin
-
-end;
-
-{ TWaveInThreadTests }
-
-procedure TWaveInThreadTests.TestCreate;
-begin
-
-end;
-
-procedure TWaveInThreadTests.TestExecute;
-begin
-
+  CreateAudioIn;
+  FAudioIn.Start;
+  Sleep(1000);
+  FAudioIn.Stop;
 end;
 
 initialization
 
-  TestFramework.RegisterTest('AudioInTests Suite',
-    TAudioInTests.Suite);
-  TestFramework.RegisterTest('AudioInTests Suite',
-    TWaveInThreadTests.Suite);
+  TestFramework.RegisterTest('AudioInTests Suite', TAudioInTests.Suite);
+  Tracing('AudioBase', true);
+  Tracing('AudioIn', true);
 
 end.

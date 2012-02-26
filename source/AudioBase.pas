@@ -149,7 +149,7 @@ end;
 
 initialization
 
-  UnitID := GetUnitID('RSIAudio');
+  UnitID := GetUnitID('AudioBase');
 
 finalization
 

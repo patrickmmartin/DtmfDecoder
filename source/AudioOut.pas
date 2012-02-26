@@ -872,8 +872,7 @@ end;
 
 initialization
 
-
-  UnitID := GetUnitID('RSIAudioOut');
+  UnitID := GetUnitID('AudioOut');
 
 finalization
 

@@ -20,13 +20,15 @@ uses
   AudioOut in 'AudioOut.pas',
   AudioInTests in 'dunit\AudioInTests.pas',
   AudioOutTests in 'dunit\AudioOutTests.pas',
-  AppUtilsTests in 'dunit\AppUtilsTests.pas',
-  AudioBaseTests in 'dunit\AudioBaseTests.pas';
+  AppUtilsTests in 'dunit\AppUtilsTests.pas';
 
 {$R *.RES}
 
 begin
   Application.Initialize;
+
+  LoggingSeverity := lsNormal;
+
   if FindCmdLineSwitch('CONSOLE') then
   begin
     { Console Mode }
