@@ -7,10 +7,20 @@ uses
   TestFrameWork;
 
 type
+
+
+  TBufferEvents = record
+    Count : integer;
+  end;
+
+
   TAudioInTests = class(TTestCase)
   private
     FAudioIn: TAudioIn;
-    procedure CreateAudioIn();
+    BufferEvents: TBufferEvents;
+    procedure CreateAudioIn;
+    procedure DoBufferFilled(const Buffer : PByte; const Size : Cardinal);
+    procedure ResetBufferEvents;
   protected
 
     procedure SetUp; override;
@@ -41,9 +51,21 @@ uses
 procedure TAudioInTests.CreateAudioIn;
 begin
   CheckFalse(Assigned(FAudioIn));
-  { TODO : add some stub events to handle data, for validation }
   FAudioIn := TAudioIn.Create;
+  ResetBufferEvents;
+  FAudioIn.OnBufferFilled := DoBufferFilled;
 end;
+
+procedure TAudioInTests.ResetBufferEvents;
+begin
+  BufferEvents.Count := 0;
+end;
+
+procedure TAudioInTests.DoBufferFilled(const Buffer: PByte; const Size: Cardinal);
+begin
+  Inc(BufferEvents.Count);
+end;
+
 
 procedure TAudioInTests.SetUp;
 begin
@@ -77,14 +99,15 @@ procedure TAudioInTests.TestStart;
 begin
   CreateAudioIn;
   FAudioIn.Start;
-  Sleep(1000);
 end;
 
 procedure TAudioInTests.TestStop;
 begin
   CreateAudioIn;
   FAudioIn.Start;
+  Sleep(250);
   FAudioIn.Stop;
+  CheckTrue(BufferEvents.Count > 0, 'audio buffers should be returned');
 end;
 
 
