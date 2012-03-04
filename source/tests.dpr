@@ -32,6 +32,8 @@ begin
   if FindCmdLineSwitch('CONSOLE') then
   begin
     { Console Mode }
+    if not FindCmdLineSwitch('ALL') then
+      RegisteredTests.LoadConfiguration(ExtractFilePath(Application.ExeName) + 'dunit.ini', false, true);
     TestFramework.RunTest(RegisteredTests, [TTextTestListenerEx.Create]);
   end
   else

@@ -24,6 +24,7 @@ type
     procedure TestCanOpen;
     procedure TestStart;
     procedure TestStop;
+    procedure TestCycle;
 
   end;
 
@@ -83,8 +84,20 @@ procedure TAudioInTests.TestStop;
 begin
   CreateAudioIn;
   FAudioIn.Start;
-  Sleep(1000);
   FAudioIn.Stop;
+end;
+
+
+procedure TAudioInTests.TestCycle;
+var
+  i : integer;
+begin
+  CreateAudioIn;
+  for i := 0 to 9 do
+  begin
+    FAudioIn.Start;
+    FAudioIn.Stop;
+  end;
 end;
 
 initialization
