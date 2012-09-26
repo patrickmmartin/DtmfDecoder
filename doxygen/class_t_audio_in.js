@@ -1,0 +1,25 @@
+var class_t_audio_in =
+[
+    [ "TAudioIn", "class_t_audio_in.html#acf47e35341fae2735ac6bfe05ae29562", null ],
+    [ "~TAudioIn", "class_t_audio_in.html#afeb5623b4df7e0b85468547c7cf8a2ba", null ],
+    [ "CanOpen", "class_t_audio_in.html#aecdb2b1a6770630f14e064db1a7379ff", null ],
+    [ "Start", "class_t_audio_in.html#a259f4c61e9ec8b614749e487375a8b05", null ],
+    [ "Stop", "class_t_audio_in.html#aec1575c750ac94ea23e672cb4d8f2b26", null ],
+    [ "WaveError", "class_t_audio_in.html#a9388b7d4b5af732d0c4eeedf85e74bbe", null ],
+    [ "Active", "class_t_audio_in.html#a2f26ea83fc2ee4c4f318dee1de2d8b78", null ],
+    [ "BufferCount", "class_t_audio_in.html#a60ee6b750182e9383f1302e04103dac6", null ],
+    [ "BufferSize", "class_t_audio_in.html#af2337ca3f834480d11fcfa5a98e112f6", null ],
+    [ "BuffersOut", "class_t_audio_in.html#a36638111b97be7830c0f522604579f8e", null ],
+    [ "Device", "class_t_audio_in.html#a4b56d26705d079234155883a2e8d8691", null ],
+    [ "Framerate", "class_t_audio_in.html#a2f5c2f2ddf81d7f1f617854fe4a23755", null ],
+    [ "GetVolume", "class_t_audio_in.html#a3b03dfb151e0ac6501f0810e122e6beb", null ],
+    [ "OnBufferFilled", "class_t_audio_in.html#aeb34f305921b1befe8191c43e44330f6", null ],
+    [ "Quantization", "class_t_audio_in.html#a7690e46eb80b6f83a883bcb2dd042c36", null ],
+    [ "Stereo", "class_t_audio_in.html#aaff1fb3be6bedab7067e1392616c22ef", null ],
+    [ "Stopping", "class_t_audio_in.html#af4e4bfe005c03f2d67d582580b4d8701", null ],
+    [ "SynchMethod", "class_t_audio_in.html#ac984bb41f30efc57598122a73db25c98", null ],
+    [ "ThreadPriority", "class_t_audio_in.html#ab20fc158838e86723e3f6e04e0cc098a", null ],
+    [ "Volume", "class_t_audio_in.html#a3b696830d56e907839155ae76d22776a", null ],
+    [ "WaveDevice", "class_t_audio_in.html#a5c3de58f9308af8751432752c255ca23", null ],
+    [ "WindowHandle", "class_t_audio_in.html#a9e04782d8b92a3c361314035c435b061", null ]
+];
