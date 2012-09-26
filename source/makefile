@@ -7,10 +7,6 @@ ROOT = $(MAKEDIR)\..
 MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
 BRCC = $(ROOT)\bin\brcc32.exe $**
 
-# the Delphi 7 make doesn't like the path to be too long
-# this is a very simple fix
-PATH=$(ROOT)\bin
-
 # compiler options
 DCCOPT=-Q -M -W -H
 
@@ -54,3 +50,5 @@ tests: clean tests.exe ..\bin\nsp.dll
         ..\bin\tests.exe /CONSOLE        
 
 
+docs:
+	doxygen
