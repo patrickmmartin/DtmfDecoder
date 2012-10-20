@@ -13,57 +13,81 @@ uses
 {.$DEFINE VERYVERBOSE}
   { very verbose tracing }
 
-  {.$DEFINE NO_LOCK}
-  { turn off locking }
-
-  { lockable object ancestor }
-
-type TThreadSafe = class
+{ internally locking object ancestor }
+type
+  TThreadSafe = class
   private
+    { internal critical section }
     fCriticalSection : TRTLCriticalSection;
+
+    { TODO : used to prevent concurrent operations on an object in ther process of destruction - is there a better way? }
+    { destroy in process flag }
     fDestroying : boolean;
 
   public
+    { locks the object - blocks if already locked in a different thread }
     procedure Lock;
+    { attempts to lock the object - returns true if successful }
     function TryLock : boolean;
+    { unlocks the object}
     procedure Unlock;
+    { virtual constructor  }
     constructor Create; virtual;
+    { virtual constructor }
     destructor Destroy; override;
 
   end;
 
-{ synchroniser to allow callbacks to specific thread contexts }
-type TSynchroniser = class(TThreadSafe)
+  { synchroniser to allow callbacks to specific thread contexts from other threads }
+  TSynchroniser = class(TThreadSafe)
   private
+    { stores the creating thread context ID }
     fCallBackContext : Cardinal;
+    { window handle employed for cross thread calls }
     fWindowHandle : HWND;
+    { callback method to be invoked }
     fMethod : TNotifyEvent;
+    { sets fMethod wrapped in a lock }
     procedure SetMethod(const Value: TNotifyEvent);
   protected
+    { actual runner that invokes fMethod, if assigned }
     procedure DoMethod(Sender : TObject);
+    { handle for the fWindowHandle WndProc }
     procedure WndProc(var Msg: TMessage);
+    { allocates the window handle }
     procedure GetHandle;
+    { frees the window handle }
     procedure FreeHandle;
   public
+    { sets the thread context and obtains a window handle for the current thread context }
     procedure SetContext;
+    { runs the method property, optionally asynchronously }
     procedure RunMethod(Sender : TObject ; ASynch : boolean = false);
-
+    { the method property }
     property Method : TNotifyEvent read fMethod write SetMethod;
+    { constructor override }
     constructor Create; override;
+    { destructor override }
     destructor Destroy; override;
 
 end;
 
-{ static buffer memorystream class to get round memory allocation errors - grrr }
 type
+  { application defined thread class to allow setting the thread name }
+  { TODO : recent VCL versions render the custom code obselete }
   TAppThread = class(TThread)
   private
+    { thread name }
     FThreadName: string;
+    { procedure to set the thread name in the thread context }
     procedure SetThreadName(const Value: string);
   protected
+    { overridden execute procedure for the main thread code }
     procedure Execute; override;
   public
+    { thread name accessor }
     property ThreadName : string read FThreadName write SetThreadName;
+    { overriden destructor }
     destructor Destroy; override;
   end;
 
@@ -137,25 +161,17 @@ procedure TThreadSafe.Lock;
 begin
   if fDestroying then
     raise EAbort.Create('Destroying - cannot lock');
-  {$IFNDEF NO_LOCK}
   EnterCriticalSection(fCriticalSection);
-  {$ENDIF}
 end;
 
 procedure TThreadSafe.Unlock;
 begin
-  {$IFNDEF NO_LOCK}
   LeaveCriticalSection(fCriticalSection);
-  {$ENDIF}
 end;
 
 function TThreadSafe.TryLock: boolean;
 begin
-  {$IFNDEF NO_LOCK}
   Result := TryEnterCriticalSection(fCriticalSection);
-  {$ELSE}
-  Result := true;
-  {$ENDIF}
 end;
 
 
