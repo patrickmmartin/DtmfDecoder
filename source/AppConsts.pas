@@ -3,45 +3,36 @@ unit AppConsts;
 interface
 
 uses
-  SysUtils,              { UpperCase }
+  SysUtils,     { UpperCase }
   Windows,      { HWND }
   Forms,        { TForm }
   messages,
-  classes,       { TComponent}
-  stdctrls       { TListBox }
+  classes,      { TComponent}
+  stdctrls      { TListBox }
   ;
 
-  {$DEFINE VERBOSE}
-
-{internal exception types}
+  {.$DEFINE VERBOSE}
 type
-  EAppError = class(Exception);
-    ENotImplementedError = class(EAppError);
-    ENotCapableError = class(EAppError);
-    EOutOfRangeError = class(EAppError);
-    EConfigurationError = class(EAppError);
+  {* A generic logging event}
+  TLogEvent = procedure (Sender : TObject ; const EventTime : TDateTime ; const Msg : string) of object;
+  {* a generic parameter validation event}
+  TParameterValidateEvent = procedure (const Parameter : string ; var Value : string) of object;
+  {* a generic parameter validation event}
+  TMsgEvent = procedure (Sender : TObject ; const Msg : string) of object;
+  {* progress update event }
+  TPercentEvent = procedure (Sender : TObject ; const Percent : double);
 
+  {* Exception type for an invalid parameter }
+  EParameterError = class(Exception);
 
-{ A generic logging event}
-type TLogEvent = procedure (Sender : TObject ; const EventTime : TDateTime ; const Msg : string) of object;
-{ a generic parameter validation event}
-type TParameterValidateEvent = procedure (const Parameter : string ; var Value : string) of object;
-{ a generic parameter validation event}
-type TMsgEvent = procedure (Sender : TObject ; const Msg : string) of object;
-{ progress update event }
-type TPercentEvent = procedure (Sender : TObject ; const Percent : double);
+  {* A generic synchronisation enum
+  @see smCreatorThread - this means a sendmessage is done
+    via a window created in the context of the opening thread
+  @see smFreeThreaded - this means a callbacks could happen in any thread context
+    and the recipient has to be ready for this }
+  type TSynchMethod = ( smCreatorThread,
+                        smFreeThreaded);
 
-
-type EParameterError = class(Exception);
-
-{ A generic synchronisation enum }
-type TSynchMethod = ( smCreatorThread,
-                      smFreeThreaded);
-
-{ smCreatorThread - this means a sendmessage is done
-  via a window created in the context of the opening thread }
-{ smFreeThreaded - this means a callbacks could happen in any thread context
-  and the recipient better be ready }
 
 resourcestring
   sCreatorThread = 'Creator thread';
@@ -50,67 +41,130 @@ resourcestring
 const
   SynchMethodDesc : array[TSynchMethod] of string = (sCreatorThread, sFreeThreaded);
 
-  {the numeric characters}
+  {* the numeric characters}
   NumericChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  {the DTMF character set}
+  {* the DTMF character set}
   DigitChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '#', 'A', 'B', 'C', 'D'];
-  {the common phone keys}
+  {* the common phone keys}
   KeyDigitChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '#'];
 
 
-{ tracing functions and types }
 
-type TLogSeverity = (lsInformation, lsNormal, lsWarning, lsError);
+type
+  {* log severity levels ordered by severity }
+  TLogSeverity = (lsInformation, lsNormal, lsWarning, lsError);
 
-const LogSeverityDesc : array [TLogSeverity] of string =
+const
+  {* textual descriptions of the log severities }
+  LogSeverityDesc : array [TLogSeverity] of string =
                 ('Information', 'Normal', 'Warning', 'Error');
 
+
+{* add log trace
+@param UnitID unit ID for tracing
+@param Msg trace message
+@param LogSeverity severity level
+ }
 procedure Trace(const UnitID : BYTE; const Msg : string ; const LogSeverity : TLogSeverity = lsInformation);
+{* turns all tracing on/off
+@param Enable turn on of true
+ }
 procedure TraceAll(const Enable : boolean);
+{* enable / disable tracing by unitname
+@param UnitName
+@param Add
+}
 procedure Tracing(const UnitName : string ; const Add : boolean);
+{* obtain a unit ID for unit name
+@param UnitName
+@return the assigned unit ID
+}
 function GetUnitID(const UnitName : string) : BYTE;
 
+{* shows the visual trace terminal
+@param Show - show or hide
+}
 procedure TraceTerminal(const Show : boolean);
+
+{* log to file or not
+@param Write - log to file or not
+}
 procedure TraceLog(const Write : boolean);
 
-var
-  TraceLogLazyWrite : boolean = true;
-
+{* pump the message queue for the given window handle
+@param WindowHandle - handle of the window }
 procedure PumpWindowQueue(const WindowHandle : HWND);
+{* pump the message queue for the current thread
+threads in Windows acquire a message queue after certain API calls,
+allowing APC and other elements }
 procedure PumpThreadQueue;
+{* yet another home brew time slice yield method }
 procedure YieldTimeSlice;
+{* yields for a given time period
+@param Period the period to yield for
+@see YieldTimeSlice
+}
 procedure YieldPeriod(const Period : Cardinal);
 
-{ formats a SYSTEMTIME struct into a string representation }
+{* formats a SYSTEMTIME struct into a string representation
+@return the time formatted into a string }
 function FormatSystemTime(const SystemTime : TSystemTime) : string;
+{* returns the current time in TSystemTime format
+@return current time }
 function NowSystemTime : TSystemTime;
-
+{* compares tick counts returned from GetTickCount.
+<p>
+wrapper to get round the GetTickCount wrapping issue
+returns -1, 0, 1 for TickCount less, equal or more than current GetTickCount
+as per standard approach.
+Note that due to the 49 day rollover, the mid point is chosen as the
+break point, hence counts 25 days appart will fail
+@param TickCount - the compared value
+@see GetTickCount }
 function CompareTickCount(const TickCount : DWORD) : integer;
-
+{* adds a thread name to list for logging
+@param Name thread name
+@param Thread thread for monitoring the thread status}
 procedure AddThreadName(Name : string ; Thread : TThread);
+{* removes the thread name
+@param name}
 procedure RemoveThreadName(Name : string);
+{* utility function to return the current thread name
+@return the thread name, if registered }
 function ThreadName : string;
+{* returns all the thread names }
 procedure GetThreadNames(NameList : TStringList);
 
 const
-  RSI_STRING_MSG = WM_USER;
+  {* windows message for passing a string over }
+  APP_STRING_MSG = WM_USER;
 
 var
+  {logging severity level }
+  LoggingSeverity : TLogSeverity = lsInformation;
+
+  {* yield quantum }
   YieldSleep : integer = 10;
-
-var
-  TrueStr, FalseStr : string;
 
   {now exposed for direct use by applications }
   TraceForm : TForm = nil;
   TraceFormHwnd : HWND = INVALID_HANDLE_VALUE;
 
-  LoggingSeverity : TLogSeverity = lsInformation;
+{* utility function to return whether a unit is being traced
+@param Index
+@return are we tracing that unit}
 
 function TraceUnit(Index : BYTE) : boolean;
+{* utility function to return whether a unit name
+@param Index
+@return are we tracing that unit}
 function TraceUnitName(Index : BYTE) : string;
 
 
+{* coverts a Log Severity string to the enum
+@param LogSeverityStr
+return the TLogSeverity level - defaults to lsInformation
+}
 function StrToLogSeverity(LogSeverityStr  : string): TLogSeverity;
 
 { tracing form base prototypes }
@@ -119,7 +173,7 @@ type
 
   TBaseTraceForm = class(TForm)
   protected
-    procedure StringMessage(var Msg : TMessage); message RSI_STRING_MSG;
+    procedure StringMessage(var Msg : TMessage); message APP_STRING_MSG;
   public
     { Public declarations }
     constructor Create(AOwner : TComponent); override;
@@ -135,9 +189,6 @@ type
     { Public declarations }
     constructor Create(AOwner : TComponent); override;
   end;
-
-var
-  TracingAll : boolean = false;
 
 resourcestring
   sYes = 'Yes';
@@ -155,6 +206,7 @@ uses
   ;
 
 var
+  TracingAll : boolean = false;
   CurrentUnitID : BYTE = 1;
   UseTerminal : boolean = false;
   TraceFile : THandle;
@@ -164,6 +216,9 @@ var
   TraceUnits : array[BYTE] of boolean;
   {short string to avoid problems with re-allocation}
   TraceUnitNames : array[BYTE] of shortstring;
+  { whether to not flush to log every time }
+  TraceLogLazyWrite : boolean = true;
+
 
 const
 
@@ -197,29 +252,28 @@ begin
 end;
 
 procedure Trace(const UnitID : BYTE; const Msg : string ; const LogSeverity : TLogSeverity);
-{$IFDEF VERBOSE}
 var
   TraceStr : string;
+{$IFDEF VERBOSE}
   TracePChar : PChar;
   Written : Cardinal;
 {$ENDIF}
 begin
-  {$IFDEF VERBOSE}
   if (LogSeverity >= LoggingSeverity) and ( TracingAll or (UnitID = 0) or (TraceUnits[UnitId])) then
   begin
-
     TraceStr := Format(TraceFmt, [FormatSystemTime(NowSystemTime),
                        LogSeverityDesc[LogSeverity], Msg,
                        TraceUnitNames[UnitId], ThreadName]);
+
+    OutputDebugString(PChar(TraceStr));
+  {$IFDEF VERBOSE}
 
     if IsWindow(TraceFormHWND) then
     begin
       TracePChar := StrAlloc(Length(TraceStr) + 1);
       StrCopy(TracePChar, PChar(TraceStr));
-      PostMessage(TraceFormHWND, RSI_STRING_MSG, 0, Longint(TracePChar));
+      PostMessage(TraceFormHWND, APP_STRING_MSG, 0, Longint(TracePChar));
     end;
-
-    OutputDebugString(PChar(TraceStr));
 
       if (TraceFile <> 0) then
       begin
@@ -228,8 +282,8 @@ begin
         if not TraceLogLazyWrite then
           FlushFileBuffers(TraceFile);
       end;
-    end
   {$ENDIF}
+    end
 end;
 
 procedure TraceAll(const Enable : boolean);
@@ -373,7 +427,7 @@ end;
 
 procedure PumpThreadQueue;
 begin
-  { needed to threads to get ansynchronous callbacks }
+  { needed for threads to get ansynchronous callbacks }
   PumpWindowQueue(0);
 end;
 
@@ -412,6 +466,7 @@ begin
   { wrapper to get round the GetTickCount wrapping issue }
   { returns -1, 0, 1 for TickCount less, equal or more than current GetTickCount
     as per standard approach}
+  { TODO : could this be a simple expression }
 
   NowTickCount := GetTickCount;
 
@@ -552,8 +607,6 @@ initialization
   { ensure that tracing to ID 0 goes to a known place }
   TraceUnitNames[0] := 'Main';
   TraceUnits[0] := true;
-  TrueStr := BooleanIdents[true];
-  FalseStr := BooleanIdents[false];
   AddThreadName('main', nil);
 
 
