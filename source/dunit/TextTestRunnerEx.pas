@@ -9,25 +9,28 @@ uses
 
 type
 
+{* class to improve open the test output for automated usage
+ note - the use of Write / WriteLn is inherited from the super class - will raise
+ error 105 if there is no console at the point of writing }
   TTextTestListenerEx = class(TTextTestListener)
   public
+    {* override of StartTest to implement some output
+    @param test - the Test instance }
     procedure StartTest(test: ITest); override;
+    {* override of EndTest to implement some output 
+    @param test - the Test instance }
     procedure EndTest(test: ITest); override;
+    {* override of StartSuite to add a newline 
+    @param test - the Test instance }
     procedure StartSuite(suite: ITest); override;
+    {* override of AddError to implement some output upon error
+    @param test - the Test instance }
     procedure AddError(error: TTestFailure); override;
   end;
 
 implementation
 
-
-
 { TTextTestListenerEx }
-
-(* class to improve open the test output for automated usage
- note - the use of Write / WriteLn is inherited from the super class - will raise
- error 105 if there is no console at the point of writing *)
-
-
 
 procedure TTextTestListenerEx.StartSuite(suite: ITest);
 begin
