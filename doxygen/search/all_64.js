@@ -7,7 +7,6 @@ var searchData=
   ['default_5fminfreq',['DEFAULT_MINFREQ',['../_d_t_m_f_8pas.html#af5d218bc45c01e6e3eb600573757967d',1,'DTMF.pas']]],
   ['default_5fpowerrati0',['DEFAULT_POWERRATI0',['../_d_t_m_f_8pas.html#ad332ecbba8889524e078093236d53e3a',1,'DTMF.pas']]],
   ['default_5fsilencecount',['DEFAULT_SILENCECOUNT',['../_d_t_m_f_8pas.html#a719ba92e52f0cde699a03f8a77853af1',1,'DTMF.pas']]],
-  ['deletecriticalsection',['DeleteCriticalSection',['../_app_consts_8pas.html#a5f48f1d1e6e9cfb2a4e43a83ba7d8b42',1,'AppConsts.pas']]],
   ['device',['Device',['../class_t_audio_in.html#a4b56d26705d079234155883a2e8d8691',1,'TAudioIn']]],
   ['digitchars',['DigitChars',['../_app_consts_8pas.html#a8d6e18b8de7ee914ebabf5e6eb239e5a',1,'AppConsts.pas']]],
   ['dodetect',['DoDetect',['../class_t_d_t_m_f_decoder.html#acfb11afdd242de3e5de0fcedc7edaa1c',1,'TDTMFDecoder']]],

@@ -42,6 +42,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -116,7 +117,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -129,6 +130,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 &#160;
 
 <h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>AddError()
+: <a class="el" href="class_t_text_test_listener_ex.html#ae467e86c68b79bca926247354259316c">TTextTestListenerEx</a>
+</li>
 <li>Analyse()
 : <a class="el" href="class_t_d_t_m_f_decoder.html#afb518e2c376546b0a7f34092c67d90b0">TDTMFDecoder</a>
 </li>
@@ -172,10 +176,13 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>EAudio()
 : <a class="el" href="class_e_audio.html#a41ffea398b69734eb05c34c11f422101">EAudio</a>
 </li>
+<li>EndTest()
+: <a class="el" href="class_t_text_test_listener_ex.html#a05a42f33e76d0bf20c6a5e9bde5b00c4">TTextTestListenerEx</a>
+</li>
 <li>Execute()
-: <a class="el" href="class_t_wave_out_thread.html#a04e44119d9fcf4e2237b417b9142d20a">TWaveOutThread</a>
-, <a class="el" href="class_t_wave_in_thread.html#ae122130b996efa8e6815648e6b7a28a1">TWaveInThread</a>
+: <a class="el" href="class_t_wave_in_thread.html#ae122130b996efa8e6815648e6b7a28a1">TWaveInThread</a>
 , <a class="el" href="class_t_app_thread.html#ad7cc598a7b6ed230ee745ad54e66c9ef">TAppThread</a>
+, <a class="el" href="class_t_wave_out_thread.html#a04e44119d9fcf4e2237b417b9142d20a">TWaveOutThread</a>
 </li>
 </ul>
 
@@ -245,13 +252,23 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>SetContext()
 : <a class="el" href="class_t_synchroniser.html#a8dad74ad52d157738917614306ccf165">TSynchroniser</a>
 </li>
+<li>SetUp()
+: <a class="el" href="class_t_audio_in_tests.html#a9cc7bd066f4cfddc757d9a798466e282">TAudioInTests</a>
+, <a class="el" href="class_t_audio_out_tests.html#ad96228568df5b9508ab1fec2cdc05f70">TAudioOutTests</a>
+</li>
 <li>Start()
 : <a class="el" href="class_t_audio_in.html#a259f4c61e9ec8b614749e487375a8b05">TAudioIn</a>
 , <a class="el" href="class_t_audio_out.html#abcf30641e18213f001cfd50a8d057f2d">TAudioOut</a>
 </li>
+<li>StartSuite()
+: <a class="el" href="class_t_text_test_listener_ex.html#a09aa01c491303629289bf487e3fa9416">TTextTestListenerEx</a>
+</li>
+<li>StartTest()
+: <a class="el" href="class_t_text_test_listener_ex.html#ad5fb0ebd9f87a42dfb657174242d9bbc">TTextTestListenerEx</a>
+</li>
 <li>Stop()
-: <a class="el" href="class_t_audio_in.html#aec1575c750ac94ea23e672cb4d8f2b26">TAudioIn</a>
-, <a class="el" href="class_t_audio_out.html#a52b7cb9fba2d6ab9e5c38b715de7029f">TAudioOut</a>
+: <a class="el" href="class_t_audio_out.html#a52b7cb9fba2d6ab9e5c38b715de7029f">TAudioOut</a>
+, <a class="el" href="class_t_audio_in.html#aec1575c750ac94ea23e672cb4d8f2b26">TAudioIn</a>
 </li>
 <li>StringMessage()
 : <a class="el" href="class_t_base_trace_form.html#a55a9a05711412ea83e57c19ee1ede197">TBaseTraceForm</a>
@@ -278,6 +295,33 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>TDTMFDecoder()
 : <a class="el" href="class_t_d_t_m_f_decoder.html#a3458ce1bf87a920495b887c3bc8829e7">TDTMFDecoder</a>
+</li>
+<li>TearDown()
+: <a class="el" href="class_t_audio_in_tests.html#ae891fa5eaee3351569f573d6081e2508">TAudioInTests</a>
+, <a class="el" href="class_t_audio_out_tests.html#a1e7f12a740f9c023e06a1166d19a370d">TAudioOutTests</a>
+</li>
+<li>TestCanOpen()
+: <a class="el" href="class_t_audio_in_tests.html#ad4f1da7dcea196e0a6ed0b02046f68e0">TAudioInTests</a>
+, <a class="el" href="class_t_audio_out_tests.html#a5e82dacd331ccd234cc38fa0b9ed285a">TAudioOutTests</a>
+</li>
+<li>TestCreate()
+: <a class="el" href="class_t_audio_in_tests.html#a14feb0aa3f2e63f8a5c5d97321181ca9">TAudioInTests</a>
+, <a class="el" href="class_t_audio_out_tests.html#a7305e1eddfc9b904fee655516ed38eeb">TAudioOutTests</a>
+</li>
+<li>TestCycle()
+: <a class="el" href="class_t_audio_in_tests.html#a9a9ce3ec8987b89fda32f9b3fc1faf0d">TAudioInTests</a>
+</li>
+<li>TestDestroy()
+: <a class="el" href="class_t_audio_in_tests.html#a8938e342c2bf184b99e715b86c93be01">TAudioInTests</a>
+, <a class="el" href="class_t_audio_out_tests.html#a9a308977bf7d5ee59368cbd760b5992f">TAudioOutTests</a>
+</li>
+<li>TestStart()
+: <a class="el" href="class_t_audio_out_tests.html#a021ad78d7ca6f1f9caa2cb9d1fbb5031">TAudioOutTests</a>
+, <a class="el" href="class_t_audio_in_tests.html#ad54673c7bde7ed8bdf7042f84d4a1a52">TAudioInTests</a>
+</li>
+<li>TestStop()
+: <a class="el" href="class_t_audio_out_tests.html#a93f419c3ca1b75a4f6e8322f0782b7e0">TAudioOutTests</a>
+, <a class="el" href="class_t_audio_in_tests.html#a0b0e8e7902d843492adabd8f2cf1e1dd">TAudioInTests</a>
 </li>
 <li>TryLock()
 : <a class="el" href="class_t_thread_safe.html#a13f9c20b1c9cf449e4afcdb24b519bfd">TThreadSafe</a>
@@ -341,7 +385,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Sep 26 2012 23:24:19 for DTMF Decoder by
+    <li class="footer">Generated on Sun Oct 21 2012 16:12:55 for DTMF Decoder by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.1.1 </li>
   </ul>

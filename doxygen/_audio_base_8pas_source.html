@@ -42,6 +42,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -87,7 +88,7 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -119,7 +120,7 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">public</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    MMError : MMResult;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    constructor CreateError(Msg : <span class="keywordtype">string</span> ; Error : MMResult);</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="code" href="class_e_audio.html#a8a155c2135af1f20972548edf2b65b24">   19</a></span>&#160;  <a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="code" href="class_e_audio.html#a8a155c2135af1f20972548edf2b65b24">   19</a></span>&#160;  <a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    EAudioInvalidOp = <span class="keyword">class</span>(<a class="code" href="class_e_audio.html">EAudio</a>);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    EAudioWave = <span class="keyword">class</span>(<a class="code" href="class_e_audio.html">EAudio</a>);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    EAudioSystem = <span class="keyword">class</span>(<a class="code" href="class_e_audio.html">EAudio</a>);</div>
@@ -136,7 +137,7 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    procedure <a class="code" href="class_t_audio_base.html#a7820b2484c9c6ce4da57a4190d8d5e3b">WaveError</a>(Msg : String ; Err :  MMResult); <span class="keyword">virtual</span>; <span class="keyword">abstract</span>;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    procedure <a class="code" href="class_t_audio_base.html#a4b14e10b6f072057c60a18cb301e8fc1">MMCheck</a>(<span class="keyword">const</span> Msg : String ; Err : MMResult); <span class="keyword">virtual</span>;</div>
 <div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#a48606cff9eaa6c468b7c6f1676304e8e">   35</a></span>&#160;    procedure <a class="code" href="class_t_audio_base.html#ac4832c921217f262cf5f49179f5b9dd4">SystemError</a>; <span class="keyword">virtual</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;procedure <a class="code" href="_audio_base_8pas.html#af8b2ee38da2a67ef5e257da906b52c9f">GetAudioInDevices</a>(DeviceList : TStrings);</div>
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#a3aba0e0d2e840d004d279c76c6e3ed71">   39</a></span>&#160;procedure <a class="code" href="_audio_base_8pas.html#a83e00b24b0211899eba03c6abc82325c">GetAudioOutDevices</a>(DeviceList : TStrings);</div>
@@ -145,8 +146,8 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">const</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="_audio_base_8pas.html#a2d3da52395f14b7164c244b339f53392">RSIM_BUFFER</a> = WM_USER;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="_audio_base_8pas.html#ada70075499bba7d183ef73160995c50d">RSIM_PLAYDONE</a> = RSIM_BUFFER + 1;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="_audio_base_8pas.html#acb9f94ca9a639f00318d773448603bbe">APPM_BUFFER</a> = WM_USER;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="_audio_base_8pas.html#a8923e407f9da9ff686998f8c07b478d6">APPM_PLAYDONE</a> = APPM_BUFFER + 1;</div>
 <div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="class_t_audio_base.html">   47</a></span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;resourcestring</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
@@ -176,12 +177,12 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;begin</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  AppConsts.Trace(UnitId, Msg, LogSeverity);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">function</span> <a class="code" href="_audio_base_8pas.html#a708d1a5501fb297258698999a46ca0b6">IsFormatSupported</a>(pwfx : PWAVEFORMATEX ; uDeviceID : integer) : MMRESULT;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;begin</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  Result := (waveOutOpen(nil, DWORD(uDeviceID), pwfx, 0, 0, WAVE_FORMAT_QUERY));</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
@@ -189,8 +190,8 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;begin</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  inherited Create(Msg);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  MMError := Error;</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#a2d3da52395f14b7164c244b339f53392">   89</a></span>&#160;<a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#ada70075499bba7d183ef73160995c50d">   90</a></span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#acb9f94ca9a639f00318d773448603bbe">   89</a></span>&#160;<a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#a8923e407f9da9ff686998f8c07b478d6">   90</a></span>&#160;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;procedure <a class="code" href="_audio_base_8pas.html#af8b2ee38da2a67ef5e257da906b52c9f">GetAudioInDevices</a>(DeviceList : TStrings);</div>
@@ -206,9 +207,9 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div class="line"><a name="l00103"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#acfab3eb56b278bf197f3f79ff9da0efb">  103</a></span>&#160;  begin</div>
 <div class="line"><a name="l00104"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#a3fb6c0a28ca5b6a93d1aef0813d4f33b">  104</a></span>&#160;    waveInGetDevCaps(i, @WaveInCaps, <span class="keyword">sizeof</span>(WaveInCaps));</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    DeviceList.AddObject(WaveInCaps.szPname, TObject(i));</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;procedure <a class="code" href="_audio_base_8pas.html#a83e00b24b0211899eba03c6abc82325c">GetAudioOutDevices</a>(DeviceList : TStrings);</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;var</div>
@@ -223,20 +224,20 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div class="line"><a name="l00120"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#a47240e99981805050499a0a8913d3507">  120</a></span>&#160;  begin</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    waveOutGetDevCaps(i, @WaveOutCaps, <span class="keyword">sizeof</span>(WaveOutCaps));</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    DeviceList.AddObject(WaveOutCaps.szPname, TObject(i));</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{ <a class="code" href="class_t_audio_base.html">TAudioBase</a> }</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;procedure <a class="code" href="class_t_audio_base.html">TAudioBase</a>.<a class="code" href="class_t_audio_base.html#aaa708be340371b36c4a6dd77975941e6">InvalidOp</a>(Msg : <span class="keywordtype">string</span>);</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;begin</div>
 <div class="line"><a name="l00130"></a><span class="lineno"><a class="code" href="_audio_base_8pas.html#a708d1a5501fb297258698999a46ca0b6">  130</a></span>&#160;  <span class="keyword">raise</span> EAudioInvalidOp.Create(Msg);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;procedure <a class="code" href="class_t_audio_base.html">TAudioBase</a>.<a class="code" href="class_t_audio_base.html#ac4832c921217f262cf5f49179f5b9dd4">SystemError</a>;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;begin</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keyword">raise</span> EAudioSystem.Create(SysErrorMessage(GetLastError));</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;procedure <a class="code" href="class_t_audio_base.html">TAudioBase</a>.<a class="code" href="class_t_audio_base.html#a4b14e10b6f072057c60a18cb301e8fc1">MMCheck</a>(<span class="keyword">const</span> Msg : <span class="keywordtype">string</span>; Err : MMRESULT);</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;begin</div>
@@ -246,7 +247,7 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    else</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      WaveError(Msg + sAudioOperationFailed, Err)</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<a class="code" href="_app_consts_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<a class="code" href="_audio_out_8pas.html#a095a0e9ebeec7ad44284bcda05dee615">end</a>;</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
@@ -263,7 +264,7 @@ $(document).ready(function(){initNavTree('_audio_base_8pas.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="_audio_base_8pas.html">AudioBase.pas</a></li>
-    <li class="footer">Generated on Wed Sep 26 2012 23:24:19 for DTMF Decoder by
+    <li class="footer">Generated on Sun Oct 21 2012 16:12:55 for DTMF Decoder by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.1.1 </li>
   </ul>

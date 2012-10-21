@@ -1,6 +1,7 @@
 var NAVTREE =
 [
   [ "DTMF Decoder", "index.html", [
+    [ "Todo List", "todo.html", null ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Index", "classes.html", null ],
@@ -19,8 +20,7 @@ var NAVTREE =
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Enumerator", "globals_eval.html", null ]
       ] ]
     ] ]
   ] ]
@@ -29,7 +29,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_app_consts_8pas.html",
-"class_t_d_t_m_f_decoder.html#afb518e2c376546b0a7f34092c67d90b0",
+"class_t_synchroniser.html#a146d218304d3f7942f917a95ce199335",
 ];
 
 var navTreeSubIndices = new Array();
