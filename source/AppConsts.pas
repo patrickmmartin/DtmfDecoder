@@ -88,6 +88,7 @@ procedure TraceTerminal(const Show : boolean);
 
 {* log to file or not
 @param Write - log to file or not
+@todo remove reliance upon Application
 }
 procedure TraceLog(const Write : boolean);
 
@@ -120,7 +121,9 @@ as per standard approach.
 Note that due to the 49 day rollover, the mid point is chosen as the
 break point, hence counts 25 days appart will fail
 @param TickCount - the compared value
-@see GetTickCount }
+@see GetTickCount
+@todo could this be a simpler expression?
+}
 function CompareTickCount(const TickCount : DWORD) : integer;
 {* adds a thread name to list for logging
 @param Name thread name
@@ -366,7 +369,6 @@ begin
 
 end;
 
-
 procedure TraceLog(const Write : boolean);
 var
   Written : Cardinal;
@@ -378,7 +380,6 @@ begin
     if (TraceFile = 0) then
 
 
-     { TODO : remove reliance upon Application }
      TraceFile := CreateFile(PChar(Format('%s[%.8x].log',
                                 [ChangeFileExt(Application.ExeName, ''),
                                  GetCurrentProcessID])),
@@ -466,7 +467,6 @@ begin
   { wrapper to get round the GetTickCount wrapping issue }
   { returns -1, 0, 1 for TickCount less, equal or more than current GetTickCount
     as per standard approach}
-  { TODO : could this be a simple expression }
 
   NowTickCount := GetTickCount;
 

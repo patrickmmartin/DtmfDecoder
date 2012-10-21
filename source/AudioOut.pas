@@ -61,6 +61,8 @@ type
     procedure CreateBuffers;
     procedure DeleteBuffers;
     procedure BufferNeeded(BufferIndex : Cardinal);
+    {! window procedure for this component
+    @todo need to delegate to suitable exception handler }
     procedure WndProc(var Msg: TMessage);
     procedure SetActive(NewVal : boolean);
 
@@ -118,6 +120,8 @@ TWaveOutThread = class (TThread)
 
   public
     constructor Create(AudioOut : TAudioOut);
+    {! execute procedure for the thread
+    @todo delegate to suitable exception handler }
     procedure Execute; override;
   end;
 
@@ -635,18 +639,17 @@ procedure TAudioOut.WndProc(var Msg: TMessage);
 begin
   try
     case Msg.Msg of
-      RSIM_BUFFER :
+      APPM_BUFFER :
       begin
         BufferNeeded(Msg.WParam);
       end;
-      RSIM_PLAYDONE :
+      APPM_PLAYDONE :
       begin
         PlayDone;
         ReplyMessage(0);
       end;
     end;
   except
-    { TODO : delegate to suitable exception handler }
     // Application.HandleException(Self);
   end;
 end;
@@ -673,7 +676,7 @@ begin
   case SynchMethod of
 
     smCreatorThread :
-      SendMessage(fWindowHandle, RSIM_PLAYDONE, 0, 0);
+      SendMessage(fWindowHandle, APPM_PLAYDONE, 0, 0);
 
     smFreeThreaded :
       PlayDone;
@@ -803,7 +806,6 @@ begin
         until ((fAudioOut.fStopping) and (not fAudioOut.fActive));
 
         except
-          { TODO : delegate to suitable exception handler }
           // Application.HandleException(self);
         end;
 
@@ -822,10 +824,6 @@ end;
 
 
 procedure TAudioOut.CreateThread;
-(*
-var
-  StartCount : Cardinal;
-*)  
 begin
   fStarting := false;
   fStopping := true;
@@ -838,14 +836,25 @@ begin
 
   case (fWaveThread.fEvent.WaitFor(200)) of
     wrSignaled :
-      {InformationMessageAsync(Format('Audio out thread %d message queue creation signalled.', [fWaveDevice]), MB_OK)};
+      Trace(Format('Audio out thread %d message queue creation signalled.', [WaveDevice]), lsNormal);
     wrTimeout :
-      InformationMessageAsync(Format('Audio out thread %d message queue creation timeout.', [fWaveDevice]), MB_OK);
+    begin
+      Trace(Format('Audio out thread %d message queue creation timeout.', [WaveDevice]), lsError);
+      Abort;
+    end;
     wrAbandoned :
-      InformationMessageAsync(Format('Audio out thread %d message queue creation abandoned.', [fWaveDevice]), MB_OK);
+    begin
+      Trace(Format('Audio out thread %d message queue creation abandoned.', [WaveDevice]), lsError);
+      Abort;
+    end;
     wrError :
-      InformationMessageAsync(Format('Audio out thread %d message queue creation error %s.', [fWaveDevice, SysErrorMessage(GetLastError)]), MB_OK);
-
+    begin
+      Trace(Format('Audio out thread %d message queue creation error %s.', [WaveDevice]), lsError);
+      Abort;
+    end;  
+    else
+      Trace(Format('Audio out thread %d message queue creation unknown status.', [WaveDevice]), lsError);
+      Abort;
   end;
 
 

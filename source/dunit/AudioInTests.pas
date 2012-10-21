@@ -33,6 +33,7 @@ type
     procedure DoBufferFilled(const Buffer : PByte; const Size : Cardinal);
     { zaps the buffer events records }
     procedure ResetBufferEvents;
+
   protected
     {* overriden SetUp to set up objects
     @return void }
@@ -42,7 +43,6 @@ type
     procedure TearDown; override;
 
   published
-
     {* tests the constructor
     @return void}
     procedure TestCreate;

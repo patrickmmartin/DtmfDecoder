@@ -21,10 +21,10 @@ type
     @param test - the Test instance }
     procedure EndTest(test: ITest); override;
     {* override of StartSuite to add a newline 
-    @param test - the Test instance }
+    @param suite - the Test suite }
     procedure StartSuite(suite: ITest); override;
     {* override of AddError to implement some output upon error
-    @param test - the Test instance }
+    @param error - the error } 
     procedure AddError(error: TTestFailure); override;
   end;
 
