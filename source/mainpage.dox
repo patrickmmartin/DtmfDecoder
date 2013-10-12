@@ -1,2 +1,2 @@
-/**@brief Documentation file for Mainpage@author Patrick Martin@file*//**@mainpage DTMFDecoderThis projects wraps up a Windows Delphi component for DTMF detection.
-Some support components, such as a suite of lightweight audio components for input and output are also supplied.*/
+/**@brief Documentation file for Mainpage@author Patrick Martin@file*//**@mainpage   This projects wraps up a Windows Delphi component for DTMF detection.
+  Some support components, such as a suite of lightweight audio components for input and output are also supplied.*/
