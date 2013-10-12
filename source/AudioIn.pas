@@ -61,6 +61,8 @@ type
     procedure DeleteBuffers;
     procedure BufferFilled(BufferIndex : Cardinal);
     procedure DoBufferFilled(BufferIndex : Cardinal);
+    {! window procedure for the component
+    @todo need to delegate to suitable exception handler }
     procedure WndProc(var Msg: TMessage);
 
     { property functions }
@@ -118,6 +120,8 @@ type
 
   public
     constructor Create(AudioIn : TAudioIn);
+    {! execute method for the thread
+    @todo delegate to suitable exception handler }
     procedure Execute; override;
   end;
 
@@ -437,7 +441,7 @@ end;
 procedure TAudioIn.OpenDevice;
 begin
   try
-    { TODO : WAVE_FORMAT_DIRECT of any use ? }
+    { TODO : is WAVE_FORMAT_DIRECT of any use ? }
     MMCheck(Format('device%d WaveInOpen', [fWaveDevice]),
             WaveInOpen(@fWaveHandle, DWORD(fWaveDevice), @fWaveFormat, fWaveThread.ThreadID,
                           0, CALLBACK_THREAD));
@@ -744,11 +748,10 @@ procedure TAudioIn.WndProc(var Msg: TMessage);
 begin
   try
     case Msg.Msg of
-    RSIM_BUFFER :
+    APPM_BUFFER :
       DoBufferFilled(Msg.WParam);
     end;
   except
-    { TODO : delegate to suitable exception handler }
     // Application.HandleException(Self);
   end;
 end;
@@ -801,7 +804,7 @@ begin
   begin
     case SynchMethod of
       smCreatorThread :
-        SendMessage(fWindowHandle, RSIM_BUFFER, BufferIndex, 0);
+        SendMessage(fWindowHandle, APPM_BUFFER, BufferIndex, 0);
       smFreeThreaded :
         DoBufferFilled(BufferIndex);
     end;
@@ -943,7 +946,6 @@ begin
       until ((fAudioIn.fStopping) and (not fAudioIn.fActive));
 
       except
-        { TODO : delegate to suitable exception handler }
         //Application.HandleException(self);
       end;
 

@@ -42,8 +42,8 @@ function IsFormatSupported(pwfx : PWAVEFORMATEX ; uDeviceID : integer) : MMRESUL
 
 const
 
-  RSIM_BUFFER = WM_USER;
-  RSIM_PLAYDONE = RSIM_BUFFER + 1;
+  APPM_BUFFER = WM_USER;
+  APPM_PLAYDONE = APPM_BUFFER + 1;
 
 resourcestring
 

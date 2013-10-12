@@ -8,32 +8,58 @@ uses
 
 type
 
-
+  {* record to store buffer events }
   TBufferEvents = record
     Count : integer;
   end;
 
-
+  {* test class for the TAudioIn class
+  <p> tests the base use cases of
+  <ul>
+  <li> construction / destruction @see TestCreate, @see TestDestroy
+  <li> start / stop operation @see TestCanOpen, @see TestStart, @see TestStop
+  <li> rudimentary soak testing @see TestCycle
+  </ul>
+  @see TAudioIn}
   TAudioInTests = class(TTestCase)
   private
+    { private single instance of a TAudioIn class }
     FAudioIn: TAudioIn;
+    { record to track buffer events }
     BufferEvents: TBufferEvents;
+    { creates the TAudioIn instance }
     procedure CreateAudioIn;
+    { handles the callback for the buffer filled event }
     procedure DoBufferFilled(const Buffer : PByte; const Size : Cardinal);
+    { zaps the buffer events records }
     procedure ResetBufferEvents;
-  protected
 
+  protected
+    {* overriden SetUp to set up objects
+    @return void }
     procedure SetUp; override;
+    {* overriden TearDown to tear down objects
+    @return void}
     procedure TearDown; override;
 
   published
-
-    // Test methods
+    {* tests the constructor
+    @return void}
     procedure TestCreate;
+    {* tests the destructor
+    @return void}
     procedure TestDestroy;
+    {* tests whether the object can be opened successfully
+    @return void}
     procedure TestCanOpen;
+    {* tests whether the object can be started successfully
+    @return void}
     procedure TestStart;
+    {* tests whether the the object can be stopped succesfully
+    @return void}
     procedure TestStop;
+    {* tests the running the object start/stop in a cycle
+    @return void}
     procedure TestCycle;
 
   end;
@@ -65,7 +91,6 @@ procedure TAudioInTests.DoBufferFilled(const Buffer: PByte; const Size: Cardinal
 begin
   Inc(BufferEvents.Count);
 end;
-
 
 procedure TAudioInTests.SetUp;
 begin
@@ -126,6 +151,7 @@ end;
 initialization
 
   TestFramework.RegisterTest('AudioInTests Suite', TAudioInTests.Suite);
+  { enable tracing for the units addressed }
   Tracing('AudioBase', true);
   Tracing('AudioIn', true);
 

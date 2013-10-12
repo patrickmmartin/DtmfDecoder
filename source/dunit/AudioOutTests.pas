@@ -7,24 +7,45 @@ uses
   TestFrameWork;
 
 type
+
+  {* test class for the TAudioOut class
+  <p> tests the base use cases of
+  <ul>
+  <li> construction / destruction @see TestCreate, @see TestDestroy
+  <li> start / stop operation @see TestCanOpen, @see TestStart, @see TestStop
+  <li> rudimentary soak testing @see TestCycle
+  </ul>
+  @see TAudioOut}
   TAudioOutTests = class(TTestCase)
   private
     FAudioOut: TAudioOut;
     procedure CreateAudioOut;
 
-  protected
 
+  protected
+    {* overriden SetUp to set up objects
+    @return void }
     procedure SetUp; override;
+    {* overriden TearDown to tear down objects
+    @return void}
     procedure TearDown; override;
 
   published
-
-    // Test methods
+    {* tests the constructor
+    @return void}
     procedure TestCreate;
+    {* tests the destructor
+    @return void}
     procedure TestDestroy;
-    procedure TestStart;
-    procedure TestStop;
+    {* tests whether the object can be opened successfully
+    @return void}
     procedure TestCanOpen;
+    {* tests whether the object can be started successfully
+    @return void}
+    procedure TestStart;
+    {* tests whether the the object can be stopped succesfully
+    @return void}
+    procedure TestStop;
 
   end;
 
@@ -43,7 +64,7 @@ uses
 procedure TAudioOutTests.CreateAudioOut;
 begin
   CheckFalse(Assigned(FAudioOut));
-  { TODO : add some stub events to handle data, for validation }
+  {* TODO : add some stub events to handle data, for validation }
   FAudioOut := TAudioOut.Create;
 end;
 
@@ -95,6 +116,7 @@ end;
 initialization
 
   TestFramework.RegisterTest('AudioOutTests Suite', TAudioOutTests.Suite);
+  { enable tracing for the units addressed }
   Tracing('AudioBase', true);
   Tracing('AudioOut', true);
 

@@ -18,11 +18,10 @@ uses
 type
   TThreadSafe = class
   private
-    {* internal critical section }
+    { internal critical section }
     fCriticalSection : TRTLCriticalSection;
 
-    {* TODO : used to prevent concurrent operations on an object in ther process of destruction - is there a better way? }
-    {* destroy in process flag }
+    { set destroy in process flag }
     fDestroying : boolean;
 
   public
@@ -34,7 +33,9 @@ type
     procedure Unlock;
     {* virtual constructor  }
     constructor Create; virtual;
-    {* virtual destructor }
+    {* virtual destructor
+     @todo fDestroying is used to prevent concurrent operations on an object in the process of destruction - is there a better way?
+     }
     destructor Destroy; override;
 
   end;
@@ -74,8 +75,8 @@ type
 end;
 
 type
-  {* application defined thread class to allow setting the thread name }
-  {* TODO : recent VCL versions render the custom code obselete }
+  {* application defined thread class to allow setting the thread name
+  @todo recent VCL versions render the custom code obselete }
   TAppThread = class(TThread)
   private
     {* thread name }
