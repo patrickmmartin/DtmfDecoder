@@ -1,0 +1,60 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{76816D52-007E-45B1-96CA-75A15DE2F5D4}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DTMFDecode.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="tests.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="AudioLab.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DTMFDecode">
+			<MSBuild Projects="DTMFDecode.dproj"/>
+		</Target>
+		<Target Name="DTMFDecode:Clean">
+			<MSBuild Targets="Clean" Projects="DTMFDecode.dproj"/>
+		</Target>
+		<Target Name="DTMFDecode:Make">
+			<MSBuild Targets="Make" Projects="DTMFDecode.dproj"/>
+		</Target>
+		<Target Name="tests">
+			<MSBuild Projects="tests.dproj"/>
+		</Target>
+		<Target Name="tests:Clean">
+			<MSBuild Targets="Clean" Projects="tests.dproj"/>
+		</Target>
+		<Target Name="tests:Make">
+			<MSBuild Targets="Make" Projects="tests.dproj"/>
+		</Target>
+		<Target Name="AudioLab">
+			<MSBuild Projects="AudioLab.dproj"/>
+		</Target>
+		<Target Name="AudioLab:Clean">
+			<MSBuild Targets="Clean" Projects="AudioLab.dproj"/>
+		</Target>
+		<Target Name="AudioLab:Make">
+			<MSBuild Targets="Make" Projects="AudioLab.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DTMFDecode;tests;AudioLab"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DTMFDecode:Clean;tests:Clean;AudioLab:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DTMFDecode:Make;tests:Make;AudioLab:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

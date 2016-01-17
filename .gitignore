@@ -10,3 +10,5 @@
 /dcu/DtmfDecode
 /dcu
 *.~*
+*.identcache
+*.local
