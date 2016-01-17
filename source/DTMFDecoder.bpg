@@ -9,7 +9,7 @@ MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
 DCC = $(ROOT)\bin\dcc32.exe $**
 BRCC = $(ROOT)\bin\brcc32.exe $**
 #------------------------------------------------------------------------------
-PROJECTS = DTMFDecode.exe tests.exe
+PROJECTS = DTMFDecode.exe tests.exe AudioLab.exe
 #------------------------------------------------------------------------------
 default: $(PROJECTS)
 #------------------------------------------------------------------------------
@@ -19,6 +19,9 @@ DTMFDecode.exe: DTMFDecode.dpr
   $(DCC)
 
 tests.exe: tests.dpr
+  $(DCC)
+
+AudioLab.exe: AudioLab.dpr
   $(DCC)
 
 

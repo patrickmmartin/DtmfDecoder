@@ -36,7 +36,7 @@ DTMFDecode.exe: DTMFDecode.dpr
 
 tests.exe: tests.dpr
 
-TARGETS=tests.exe DtmfDecode.exe
+TARGETS=tests.exe DtmfDecode.exe AudioLab.exe
 
 all: $(TARGETS)
 

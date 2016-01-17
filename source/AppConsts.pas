@@ -623,3 +623,4 @@ finalization
 
   DeleteCriticalSection(ThreadNameLock);
 end.
+
