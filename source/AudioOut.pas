@@ -488,7 +488,7 @@ begin
 
     with fWaveHeaders[i] do
     begin
-        lpdata := PChar(fWaveBuffers[i]);
+        lpdata := PAnsiChar(fWaveBuffers[i]);
         dwbufferlength := fbufferSize;
         dwbytesrecorded := 0;
         dwuser := 0;

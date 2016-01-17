@@ -222,7 +222,7 @@ end;
 
 procedure TBasicToneGenerator.PlayDTMF(const Digits : string ; Duration : integer);
 var
-    lpData : PChar;
+    lpData : PAnsiChar;
     WaveHdr : TWaveHdr;
     hWaveOut : HWAVE;
     WaveFormat : TWaveFormatEx;
@@ -277,7 +277,7 @@ begin
     { in the meantime do this }
 
     { crappy typecast because of definition in TWaveFormatEx }
-    lpdata := PChar(ToneData(Digits, Duration, WaveFormat.nSamplesPerSec, SampleSize, DataSize));
+    lpdata := PAnsiChar(ToneData(Digits, Duration, WaveFormat.nSamplesPerSec, SampleSize, DataSize));
 
 
     {now check opened}
