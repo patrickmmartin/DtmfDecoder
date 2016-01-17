@@ -178,7 +178,7 @@ begin
   fDTMFDecoder.Quantisation := fAudioIn.Quantization;
   fDTMFDecoder.Framerate := fAudioIn.Framerate;
   { yields slightly better results }
-  fDTMFDecoder.Guarded := true;
+  fDTMFDecoder.Guarded := false;
   fDTMFDecoder.PowerRatio := 5;
 
   fDTMFDecoder.OnDetectEnd := OnDigit;

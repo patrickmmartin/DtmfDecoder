@@ -91,7 +91,7 @@ ImageBase=4194304
 ExeDescription=
 [Directories]
 OutputDir=..\bin
-UnitOutputDir=..\dcu
+UnitOutputDir=..\dcu\AudioLab
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=..\nsp\include
@@ -144,9 +144,10 @@ Item1=..\Shared;..\..\Delphi\Gemini
 Item2=..\Shared;..\Delphi\Gemini
 Item3=..\Shared
 [HistoryLists\hlUnitOutputDirectory]
-Count=2
-Item0=..\dcu
-Item1=.\bin
+Count=3
+Item0=..\dcu\AudioLab
+Item1=..\dcu
+Item2=.\bin
 [HistoryLists\hlOutputDirectorry]
 Count=1
 Item0=..\bin

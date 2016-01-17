@@ -3,11 +3,8 @@ unit DTMFToneGen;
 interface
 
 
-
-{$IFDEF VER140}
 { lose the deprecated warning }
   {$WARN SYMBOL_DEPRECATED OFF}
-{$ENDIF}
 
 { $DEFINE CHECK_FORMAT}
 { define this to check and downgrade wave format if required }
@@ -150,13 +147,13 @@ begin
       1:
         begin
         { BYTE values are unsigned }
-          PByte(SoundVal)^ :=  round(128 + (127 div 3) *( sin ( j * SampleAngle1 ) + sin ( j * SampleAngle2 ) ) );
+          PByte(SoundVal)^ :=  128 + round((127 div 2) *( sin ( j * SampleAngle1 ) + sin ( j * SampleAngle2 ) ) );
           Inc(PByte(SoundVal));
         end;
       2 :
         {16 bit values are signed}
         begin
-          PSmallInt(SoundVal)^ :=  round( (High(SmallInt) div 3) *( sin ( j * SampleAngle1 ) + sin ( j * SampleAngle2 ) ) );
+          PSmallInt(SoundVal)^ :=  round((High(SmallInt) div 2) *( sin ( j * SampleAngle1 ) + sin ( j * SampleAngle2 ) ) );
           Inc(PSmallInt(SoundVal));
         end;
       end;  { case}
