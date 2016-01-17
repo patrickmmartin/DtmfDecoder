@@ -1,4 +1,3 @@
-
 /nsp
 /source/DTMFDecode.~dpr
 /source/DTMFDecode.dof
@@ -10,3 +9,4 @@
 /source/tests.~dpr
 /dcu/DtmfDecode
 /dcu
+*.~*
