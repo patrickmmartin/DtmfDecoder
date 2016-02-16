@@ -89,6 +89,7 @@ procedure TAudioOutTests.TestDestroy;
 begin
   CreateAudioOut;
   FAudioOut.Free;
+  FAudioOut := nil;
 end;
 
 procedure TAudioOutTests.TestStart;

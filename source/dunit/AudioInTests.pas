@@ -111,7 +111,8 @@ end;
 procedure TAudioInTests.TestDestroy;
 begin
   CreateAudioIn;
-  FreeAndNil(FAudioIn);
+  FAudioIn.Free;
+  FAudioIn := nil;
 end;
 
 procedure TAudioInTests.TestCanOpen;
