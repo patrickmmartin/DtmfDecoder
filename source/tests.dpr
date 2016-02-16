@@ -27,7 +27,7 @@ uses
 begin
   Application.Initialize;
 
-  LoggingSeverity := lsNormal;
+  LoggingSeverity := lsInformation;
 
   if FindCmdLineSwitch('CONSOLE') then
   begin
