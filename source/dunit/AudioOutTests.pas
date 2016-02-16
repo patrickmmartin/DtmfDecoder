@@ -95,6 +95,7 @@ end;
 procedure TAudioOutTests.TestStart;
 begin
   CreateAudioOut;
+  FAudioOut.WaveDevice := 0;
   FAudioOut.Start;
   Sleep(1000);
 

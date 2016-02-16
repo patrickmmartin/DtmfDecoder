@@ -361,6 +361,7 @@ begin
       Unlock;
     end;
 
+    { TODO -oPMM -cactions : Reset should not be called on an invalid handle }
     ResetDevice;
 
   { occasional hang here on buffersout = 1 }
@@ -397,8 +398,14 @@ end;
 
 procedure TAudioOut.OpenDevice;
 begin
-  MMCheck(Format('device %d WaveOutOpen',[fWaveDevice]), WaveOutOpen(@fWaveHandle, DWORD(fWaveDevice), @fWaveFormat, fWaveThread.ThreadID,
-                          0, CALLBACK_THREAD));
+  MMCheck(Format('device %d WaveOutOpen',[fWaveDevice]),
+                                          WaveOutOpen(@fWaveHandle,
+                                          DWORD(fWaveDevice),
+                                          @fWaveFormat,
+                                          fWaveThread.ThreadID,
+                                          0,
+                                          CALLBACK_THREAD));
+  Trace(Format('WaveOutOpen handle %d', [fWaveHandle]));
 
 end;
 
@@ -410,7 +417,8 @@ end;
 
 procedure TAudioOut.ResetDevice;
 begin
-  MMCheck(Format('device %d WaveOutReset', [fWaveDevice]), WaveOutReset(fWaveHandle));
+  if (fWaveHandle <> 0) then
+    MMCheck(Format('device %d WaveOutReset', [fWaveDevice]), WaveOutReset(fWaveHandle));
 end;
 
 
@@ -485,6 +493,7 @@ begin
   for i := Low(fWaveBuffers) to High(fWaveBuffers) do
   begin
     GetMem(fWaveBuffers[i], fBufferSize);
+    ZeroMemory(fWaveBuffers[i], fBufferSize);
 
     with fWaveHeaders[i] do
     begin
@@ -774,7 +783,9 @@ begin
                 MM_WOM_CLOSE :
                 begin
                   Trace(Format('AudioOut %d close', [fAudioOut.WaveDevice]), lsNormal);
-                  fAudioOut.fActive := false;
+                  { TODO -oPMM -cactions : this does not work, whereas Stop() does }
+//                  fAudioOut.fActive := false;
+                  fAudioOut.Stop;
                   fAudioOut.DoPlayDone;
 
                 end;
