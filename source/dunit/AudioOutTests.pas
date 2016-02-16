@@ -97,7 +97,6 @@ begin
   CreateAudioOut;
   FAudioOut.WaveDevice := 0;
   FAudioOut.Start;
-  Sleep(1000);
 
 end;
 
@@ -105,7 +104,6 @@ procedure TAudioOutTests.TestStop;
 begin
   CreateAudioOut;
   FAudioOut.Start;
-  Sleep(1000);
   FAudioOut.Stop;
 end;
 
@@ -121,5 +119,6 @@ initialization
   { enable tracing for the units addressed }
   Tracing('AudioBase', true);
   Tracing('AudioOut', true);
+
 
 end.

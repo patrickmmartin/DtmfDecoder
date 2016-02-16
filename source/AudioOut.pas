@@ -734,100 +734,93 @@ begin
     if not Terminated then
     if (not fAudioOut.Stopping) then
     begin
-      try
-        repeat
-          { need to get this once only ! }
-          if PeekMessage(Msg, 0, 0, 0, PM_REMOVE) then
-          begin
-            try
-              case
-                Msg.message of
-                MM_WOM_DONE :
-                begin
-                  {we need to prevent buffers being re-processed
-                   when the parent is in the process of stopping}
-                  { find buffer }
-                    for BufferIndex := Low(fAudioOut.fWaveHeaders) to High(fAudioOut.fWaveHeaders) do
-                    begin
-                      { find header returned - could just cast it - naughty?}
-                      if (PWAVEHDR(Msg.lParam) = @fAudioOut.fWaveHeaders[BufferIndex]) then
-                        begin
-                          Trace(Format('AudioOut %d returned Buffer %d', [fAudioOut.WaveDevice, BufferIndex]), lsInformation);
-
-                          fAudioOut.Lock;
-                          try
-                            fAudioOut.UnprepareBuffer(BufferIndex);
-                            fAudioOut.BuffersOut := fAudioOut.BuffersOut - 1;
-                          finally
-                            fAudioOut.Unlock;
-                          end;
-
-                          if (fAudioOut.BuffersOut = 0) then
-                          begin
-                            fAudioOut.DeleteQueue;
-                            fAudioOut.CloseDevice;
-                          end;
-
-                          break; {for loop}
-                        end;
-                    end;
-                end;
-
-                MM_WOM_OPEN :
-                begin
-                  Trace(Format('AudioOut %d opened', [fAudioOut.WaveDevice]), lsNormal);
-                  fAudioOut.fActive :=  true;
-                end;
-
-
-                MM_WOM_CLOSE :
-                begin
-                  Trace(Format('AudioOut %d close', [fAudioOut.WaveDevice]), lsNormal);
-                  { TODO -oPMM -cactions : this does not work, whereas Stop() does }
-//                  fAudioOut.fActive := false;
-                  fAudioOut.Stop;
-                  fAudioOut.DoPlayDone;
-
-                end;
-
-              end; {message case}
-
-            except
-              on E : EAudio do
+      repeat
+        { need to get this once only ! }
+        if PeekMessage(Msg, 0, 0, 0, PM_REMOVE) then
+        begin
+          try
+            case
+              Msg.message of
+              MM_WOM_DONE :
               begin
-                E.Message := 'Execute: ' +  E.Message;
-                raise;
+                {we need to prevent buffers being re-processed
+                 when the parent is in the process of stopping}
+                { find buffer }
+                  for BufferIndex := Low(fAudioOut.fWaveHeaders) to High(fAudioOut.fWaveHeaders) do
+                  begin
+                    { find header returned - could just cast it - naughty?}
+                    if (PWAVEHDR(Msg.lParam) = @fAudioOut.fWaveHeaders[BufferIndex]) then
+                      begin
+                        Trace(Format('AudioOut %d returned Buffer %d', [fAudioOut.WaveDevice, BufferIndex]), lsInformation);
+
+                        fAudioOut.Lock;
+                        try
+                          fAudioOut.UnprepareBuffer(BufferIndex);
+                          fAudioOut.BuffersOut := fAudioOut.BuffersOut - 1;
+                        finally
+                          fAudioOut.Unlock;
+                        end;
+
+                        if (fAudioOut.BuffersOut = 0) then
+                        begin
+                          fAudioOut.DeleteQueue;
+                          fAudioOut.CloseDevice;
+                        end;
+
+                        break; {for loop}
+                      end;
+                  end;
               end;
-              else
-                raise;
+
+              MM_WOM_OPEN :
+              begin
+                Trace(Format('AudioOut %d opened', [fAudioOut.WaveDevice]), lsNormal);
+                fAudioOut.fActive :=  true;
+              end;
+
+
+              MM_WOM_CLOSE :
+              begin
+                Trace(Format('AudioOut %d close', [fAudioOut.WaveDevice]), lsNormal);
+                { TODO -oPMM -cactions : this does not work, whereas Stop() does }
+                fAudioOut.fStopping := true;
+                fAudioOut.fActive := false;
+                fAudioOut.DoPlayDone;
+
+              end;
+
+            end; {message case}
+
+          except
+            on E : EAudio do
+            begin
+              E.Message := 'Execute: ' +  E.Message;
+              raise;
             end;
-            {be nice to system in the event there are no more events to process}
-
-            YieldTimeSlice;
-          end
-          else
-          begin
-            {be nice to system in the event there are no more events to process}
-            YieldTimeSlice;
+            else
+              raise;
           end;
+          {be nice to system in the event there are no more events to process}
 
-        {need to wait for the buffers to be returned}
-
-
-        until ((fAudioOut.fStopping) and (not fAudioOut.fActive));
-
-        except
-          // Application.HandleException(self);
+          YieldTimeSlice;
+        end
+        else
+        begin
+          {be nice to system in the event there are no more events to process}
+          YieldTimeSlice;
         end;
 
-        Trace(Format('AudioOut %d not stopping : Thread suspend', [fAudioOut.WaveDevice]), lsNormal);
-        Suspend;
-      end {if not stopping}
-      else
-      begin
-        Trace(Format('AudioOut %d stopping : Thread suspend', [fAudioOut.WaveDevice]), lsInformation);
-        Suspend;
-      end;
+      {need to wait for the buffers to be returned}
+      until ((fAudioOut.fStopping) and (not fAudioOut.fActive));
+
+      Trace(Format('AudioOut %d stopping : Thread suspend', [fAudioOut.WaveDevice]), lsNormal);
+      Suspend;
+    end {if not stopping}
+    else
+    begin
+      Trace(Format('AudioOut %d stopped : Thread suspend', [fAudioOut.WaveDevice]), lsInformation);
+      Suspend;
+    end;
   until Terminated;
   Trace(Format('AudioOut %d finished : Quitting Execute', [fAudioOut.WaveDevice]), lsNormal);
 
