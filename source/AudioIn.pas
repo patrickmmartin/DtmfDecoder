@@ -860,97 +860,92 @@ begin
   repeat
   if (not fAudioIn.Stopping) then
   begin
-    try
-      repeat
-        { need to get this once only ! }
-        if PeekMessage(Msg, 0, 0, 0, PM_REMOVE) then
-        begin
-          try
-            case
-              Msg.message of
-              MM_WIM_DATA :
-              begin
-                {we need to prevent buffers being re-processed
-                 when the parent is in the process of stopping}
-                { find buffer }
-                  for BufferIndex := Low(fAudioIn.fWaveHeaders) to High(fAudioIn.fWaveHeaders) do
-                  begin
-                    { find header returned - could use WHDR_DONE flag ?}
-                    if (PWAVEHDR(Msg.lParam) = @fAudioIn.fWaveHeaders[BufferIndex]) then
-                      begin
-                        Trace(Format('AudioIn %d returned Buffer %d', [fAudioIn.WaveDevice, BufferIndex]), lsInformation);
-
-                        fAudioIn.Lock;
-                        try
-                          fAudioIn.UnprepareBuffer(BufferIndex);
-                          fAudioIn.BuffersOut := fAudioIn.BuffersOut - 1;
-                        finally
-                          fAudioIn.UnLock;
-                        end;
-                        {NB as this may use SendMessage,
-                        we need to ensure the main thread is not blocked to call this }
-                        fAudioIn.BufferFilled(BufferIndex);
-
-                        fAudioIn.Lock;
-                        try
-                          Stopping := fAudioIn.Stopping;
-                          if (not Stopping) then
-                          begin
-                            fAudioIn.PrepareBuffer(BufferIndex);
-                            fAudioIn.SendBuffer(BufferIndex);
-                          end;
-
-                        finally
-                          fAudioIn.Unlock;
-                        end;
-                        break; {for loop}
-                      end;
-                  end;
-              end;
-
-              MM_WIM_OPEN :
-              begin
-                Trace(Format('AudioIn %d opened', [fAudioIn.WaveDevice]), lsNormal);
-                fAudioIn.fActive :=  true;
-              end;
-
-
-              MM_WIM_CLOSE :
-              begin
-                Trace(Format('AudioIn %d closed', [fAudioIn.WaveDevice]), lsNormal);
-                fAudioIn.fActive := false;
-              end;
-
-            end; {message case}
-
-          except
-            on E : EAudio do
+    repeat
+      { need to get this once only ! }
+      if PeekMessage(Msg, 0, 0, 0, PM_REMOVE) then
+      begin
+        try
+          case
+            Msg.message of
+            MM_WIM_DATA :
             begin
-              E.Message := 'Execute: ' +  E.Message;
-              raise;
+              {we need to prevent buffers being re-processed
+               when the parent is in the process of stopping}
+              { find buffer }
+                for BufferIndex := Low(fAudioIn.fWaveHeaders) to High(fAudioIn.fWaveHeaders) do
+                begin
+                  { find header returned - could use WHDR_DONE flag ?}
+                  if (PWAVEHDR(Msg.lParam) = @fAudioIn.fWaveHeaders[BufferIndex]) then
+                    begin
+                      Trace(Format('AudioIn %d returned Buffer %d', [fAudioIn.WaveDevice, BufferIndex]), lsInformation);
+
+                      fAudioIn.Lock;
+                      try
+                        fAudioIn.UnprepareBuffer(BufferIndex);
+                        fAudioIn.BuffersOut := fAudioIn.BuffersOut - 1;
+                      finally
+                        fAudioIn.UnLock;
+                      end;
+                      {NB as this may use SendMessage,
+                      we need to ensure the main thread is not blocked to call this }
+                      fAudioIn.BufferFilled(BufferIndex);
+
+                      fAudioIn.Lock;
+                      try
+                        Stopping := fAudioIn.Stopping;
+                        if (not Stopping) then
+                        begin
+                          fAudioIn.PrepareBuffer(BufferIndex);
+                          fAudioIn.SendBuffer(BufferIndex);
+                        end;
+
+                      finally
+                        fAudioIn.Unlock;
+                      end;
+                      break; {for loop}
+                    end;
+                end;
             end;
-            else
-              raise;
+
+            MM_WIM_OPEN :
+            begin
+              Trace(Format('AudioIn %d opened', [fAudioIn.WaveDevice]), lsNormal);
+              fAudioIn.fActive :=  true;
+            end;
+
+
+            MM_WIM_CLOSE :
+            begin
+              Trace(Format('AudioIn %d closed', [fAudioIn.WaveDevice]), lsNormal);
+              fAudioIn.fActive := false;
+            end;
+
+          end; {message case}
+
+        except
+          on E : EAudio do
+          begin
+            E.Message := 'Execute: ' +  E.Message;
+            raise;
           end;
-          {be nice to system in the event there are no more events to process}
-
-          YieldTimeSlice;
-        end
-        else
-        begin
-          {be nice to system in the event there are no more events to process}
-          YieldTimeSlice;
+          else
+            raise;
         end;
+        {be nice to system in the event there are no more events to process}
 
-      {need to wait for the buffers to be returned}
-      until ((fAudioIn.fStopping) and (not fAudioIn.fActive));
-
-      except
-        //Application.HandleException(self);
+        YieldTimeSlice;
+      end
+      else
+      begin
+        {be nice to system in the event there are no more events to process}
+        YieldTimeSlice;
       end;
 
-      Trace(Format('AudioIn %d thread suspend', [fAudioIn.WaveDevice] ), lsInformation);
-      Suspend;
+    {need to wait for the buffers to be returned}
+    until ((fAudioIn.fStopping) and (not fAudioIn.fActive));
+
+    Trace(Format('AudioIn %d thread suspend', [fAudioIn.WaveDevice] ), lsInformation);
+    Suspend;
     end
     else
     begin
