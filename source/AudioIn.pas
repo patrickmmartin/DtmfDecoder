@@ -849,7 +849,6 @@ procedure TWaveInThread.Execute;
 var
   BufferIndex : Cardinal;
   Msg : TMsg;
-  Stopping : boolean;
 
 begin
   {implement thread code}
@@ -892,8 +891,7 @@ begin
 
                       fAudioIn.Lock;
                       try
-                        Stopping := fAudioIn.Stopping;
-                        if (not Stopping) then
+                        if (not fAudioIn.Stopping) then
                         begin
                           fAudioIn.PrepareBuffer(BufferIndex);
                           fAudioIn.SendBuffer(BufferIndex);
