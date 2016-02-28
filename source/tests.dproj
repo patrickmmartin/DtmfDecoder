@@ -82,13 +82,12 @@
 						<Source Name="MainSource">tests.dpr</Source>
 					</Source>
 					<Parameters>
-						<Parameters Name="RunParams">/CONSOLE</Parameters>
 						<Parameters Name="UseLauncher">False</Parameters>
 						<Parameters Name="LoadAllSymbols">True</Parameters>
 						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
 					</Parameters>
 					<Language>
-						<Language Name="RootDir">..\</Language>
+						<Language Name="RootDir">C:\Users\Patrick\Documents\Git\DtmfDecoder\source\</Language>
 					</Language>
 					<VersionInfo>
 						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
